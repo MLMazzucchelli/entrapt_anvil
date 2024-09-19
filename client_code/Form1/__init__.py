@@ -10,7 +10,7 @@ class Form1(Form1Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.tree_data = anvil.server.call('project_list')
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree')
         self.form_show()
   
 
