@@ -19,18 +19,6 @@ import threading
 import os
 import datetime
 
-# This is a server module. It runs on the Anvil server,
-# rather than in the user's browser.
-#
-# To allow anvil.server.call() to call functions here, we mark
-# them with @anvil.server.callable.
-# Here is an example - you can replace it with your own:
-#
-# @anvil.server.callable
-# def say_hello(name):
-#   print("Hello, " + name + "!")
-#   return 42
-#
 @anvil.server.callable
 def ensure_user():
   user = anvil.users.get_user()
@@ -47,19 +35,19 @@ def initialize_session(forceNewSession=False):
   global console_text
 
   session_ID = set_session_ID(forceNewSession=forceNewSession)
+  anvil.server.call('initialize_EntraPTc_session',session_ID)
   # except:
   #   raise Exception("Exceeded the maximum number of sessions for the current user")      
   # else:  
   #   #Initialize a session. If an eosfit session already exist for this browser session, use it.
   #   #If multiple Eosfit sessions are active, get the first eosfit session associated to the current browser session.
-  #   #console_text = anvil.server.call('initialize_session',session_ID, selected_version)
+  #   #console_text = anvil.server.call('initialize_EntraPTc_session',session_ID)
   #   a=2
 
 
 @anvil.server.callable
 def set_session_ID(forceNewSession=False):
-  print(anvil.users.get_user())
-  #if forceNewSession=False, a new session will be create even if one is already active in the browser  
+  #if forceNewSession=True, a new session will be create even if one is already active in the browser  
   browser_session_ID = anvil.server.get_session_id() #Get the id of the current browser session for Anvil
   #Get only the eosfit sessions that are associated to the current browser session
   sessions_in_browser = get_active_sessions_in_current_browser_session(browser_session_ID)
@@ -68,18 +56,20 @@ def set_session_ID(forceNewSession=False):
   if len(sessions_in_browser) and not forceNewSession:
     #There is already at least one active entrapt session for the current browser window.
     #Get the first entrapt session associated to the current browser session.
-    session_ID = sessions_in_browser[0]['eosfit_session_ID']
-  elif  len(all_sessions)>=5:
+    session_ID = sessions_in_browser[0]['entrapt_session_ID']
+  elif  len(all_sessions)>=2:
     #The user has exceeded the number of available sessions.
     raise Exception("Exceeded the maximum number of sessions for the current user")  
   else: #generate a new session
     session_ID = register_session_in_database(browser_session_ID)
+  return session_ID
     
   
 
 
 def register_session_in_database(browser_session_ID):
-    session_ID = str(uuid.uuid1())
+    #session_ID = str(uuid.uuid1())
+    session_ID = anvil.users.get_user()['email']
     app_tables.sessions.add_row(user_email=anvil.users.get_user()['email'],
                                 anvil_session_ID=browser_session_ID,
                                 entrapt_session_ID=session_ID,
