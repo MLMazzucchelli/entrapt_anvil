@@ -10,6 +10,8 @@ import anvil.server
 import anvil.js
 from anvil.js.window import jQuery
 
+global entrapt_session_ID
+
 class Form1(Form1Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -17,9 +19,11 @@ class Form1(Form1Template):
 
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
-        self.tree_data = anvil.server.call('get_list_analyses_for_tree')
+        anvil.server.call('ensure_user')
+        entrapt_session_ID = anvil.server.call('initialize_session')
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
         self.tree_show()
-        anvil.server.call('initialize_session',forceNewSession=False)
+        
 
 
     def tree_show(self, **event_args):
