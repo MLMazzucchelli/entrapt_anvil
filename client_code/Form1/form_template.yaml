@@ -1,5 +1,10 @@
 components:
-- components: []
+- components:
+  - event_bindings: {change: file_loader_change}
+    layout_properties: {grid_position: 'BARRJK,CRHCYB'}
+    name: file_loader
+    properties: {}
+    type: FileLoader
   layout_properties: {slot: default}
   name: column_panel_1
   properties: {col_widths: '{}'}

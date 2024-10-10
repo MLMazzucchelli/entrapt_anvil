@@ -18,10 +18,10 @@ class Form1(Form1Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        global entrapt_session_ID
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
         entrapt_session_ID = anvil.server.call('initialize_session')
-        anvil.server.call('load_project_in_EntraPTc', entrapt_session_ID)
         self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
         self.tree_show()
         
@@ -63,3 +63,17 @@ class Form1(Form1Template):
         # Print the titles of selected nodes
         selected_titles = [node.title for node in selected_nodes]
         alert(selected_titles)
+
+    def upload_project_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      anvil.server.call('put_project_in_table')
+
+    def file_loader_change(self, file, **event_args):
+      """This method is called when a new file is loaded into this FileLoader"""
+      if self.file_loader.file.length > 1024*1024: #check the size before the file is uploaded
+          raise Exception("The uploaded project file is too large") 
+      else:
+          filename = anvil.server.call("put_project_in_table",file)
+          
+      self.file_loader.clear()
+      anvil.server.call("overwrite_project_in_EntraPTc",entrapt_session_ID, filename)

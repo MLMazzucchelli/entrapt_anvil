@@ -1,5 +1,26 @@
 allow_embedding: false
 db_schema:
+  files:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: filename
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: author
+      target: users
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: created
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: file
+      type: media
+    - admin_ui: {order: 4, width: 200}
+      name: type
+      type: string
+    server: full
+    title: Files
   sessions:
     client: none
     columns:
