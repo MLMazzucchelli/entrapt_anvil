@@ -21,6 +21,7 @@ class Form1(Form1Template):
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
         entrapt_session_ID = anvil.server.call('initialize_session')
+        anvil.server.call('load_project_in_EntraPTc', entrapt_session_ID)
         self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
         self.tree_show()
         
