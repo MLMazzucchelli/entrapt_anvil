@@ -1,4 +1,72 @@
 allow_embedding: false
+db_schema:
+  sessions:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: user_email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: anvil_session_ID
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: entrapt_session_ID
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: started
+      type: datetime
+    - admin_ui: {order: 4, width: 200}
+      name: last_action
+      type: datetime
+    - admin_ui: {order: 5, width: 200}
+      name: status
+      type: string
+    server: full
+    title: Sessions
+  users:
+    client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: email
+      type: string
+    - admin_ui: {width: 200}
+      name: enabled
+      type: bool
+    - admin_ui: {width: 200}
+      name: last_login
+      type: datetime
+    - admin_ui: {width: 200}
+      name: password_hash
+      type: string
+    - admin_ui: {width: 200}
+      name: n_password_failures
+      type: number
+    - admin_ui: {width: 200}
+      name: confirmed_email
+      type: bool
+    - admin_ui: {width: 200}
+      name: signed_up
+      type: datetime
+    - admin_ui: {width: 200}
+      name: name
+      type: string
+    - admin_ui: {width: 200}
+      name: email_confirmation_key
+      type: string
+    - admin_ui: {width: 200}
+      name: remembered_logins
+      type: simpleObject
+    - admin_ui: {width: 200}
+      name: role
+      type: string
+    - admin_ui: {width: 200}
+      name: groups
+      type: string
+    - admin_ui: {width: 200}
+      name: link_key
+      type: string
+    server: full
+    title: Users
 name: EntraPTweb
 native_deps:
   head_html: |
@@ -15,5 +83,11 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
+- client_config: {allow_remember_me: true, allow_signup: false, confirm_email: true, enable_automatically: false, remember_me_days: 30, use_email: true, use_google: true}
+  server_config: {user_table: users}
+  source: /runtime/services/anvil/users.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/google.yml
 startup_form: Form1
 uplink_visible: true

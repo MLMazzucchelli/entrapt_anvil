@@ -1,5 +1,11 @@
 from ._anvil_designer import Form1Template
 from anvil import *
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+import anvil.users
 import anvil.server
 import anvil.js
 from anvil.js.window import jQuery
@@ -10,11 +16,13 @@ class Form1(Form1Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        anvil.users.login_with_form()
         self.tree_data = anvil.server.call('get_list_analyses_for_tree')
-        self.form_show()
-  
+        self.tree_show()
+        anvil.server.call('initialize_session',forceNewSession=False)
 
-    def form_show(self, **event_args):
+
+    def tree_show(self, **event_args):
         # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
         tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
 
