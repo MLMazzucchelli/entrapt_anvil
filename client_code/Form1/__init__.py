@@ -22,16 +22,14 @@ class Form1(Form1Template):
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
         entrapt_session_ID = anvil.server.call('initialize_session')
-        
-        self.tree_refresh(entrapt_session_ID)
-        
-
-
-    def tree_refresh(self, entrapt_session_ID, **event_args):
-        # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
-        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
-
         self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
+        self.tree_show()
+        
+
+
+    def tree_show(self, **event_args):
+        # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
+        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)       
 
         # Initialize the Fancytree on the DOM node using jQuery
         jQuery(tree_dom_node).fancytree({
@@ -40,6 +38,14 @@ class Form1(Form1Template):
             "source": self.tree_data,
             "activate": lambda event, data: self.update_status_label(data.node)
         })
+
+
+    def tree_refresh(self):
+        # Refresh the tree with new data
+        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
+        tree = jQuery(tree_dom_node).fancytree("getTree")
+        tree.reload(self.tree_data)
+
         
     def update_status_label(self, node):
         # Update the status label with the activated node
@@ -79,4 +85,6 @@ class Form1(Form1Template):
           
       self.file_loader.clear()
       anvil.server.call("overwrite_project_in_EntraPTc",entrapt_session_ID, filename, file)
-      self.tree_refresh(entrapt_session_ID)
+      self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
+      self.tree_refresh()
+
