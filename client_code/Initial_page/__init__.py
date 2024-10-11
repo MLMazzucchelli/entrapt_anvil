@@ -11,7 +11,7 @@ import anvil.js
 from anvil.js.window import jQuery
 from .. import EntraPT
 from ..Logout import Logout
-from ..Project import Project
+from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
@@ -100,9 +100,6 @@ class Initial_page(Initial_pageTemplate):
       anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)      
       self.tree_refresh()
 
-    def log_out_click(self, **event_args):
-     anvil.users.logout()
-     open_form(Logout())
 
     def Project_tab_button_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -117,5 +114,15 @@ class Initial_page(Initial_pageTemplate):
       """This method is called when the button is clicked"""
       self.content_panel.clear()
       self.content_panel.add_component(Calculate_entrapment(), index=0)
+
+    def settings_button_click(self, **event_args):
+      modal = Settings()
+      alert(modal, large=True,buttons = [], dismissible = True)
+
+
+ 
+
+
+
 
       
