@@ -38,6 +38,10 @@ components:
   name: column_panel_2
   properties: {}
   type: ColumnPanel
+- layout_properties: {slot: logo}
+  name: image_1
+  properties: {height: 91.33331298828125, source: _/theme/Icon_EntraPT.png}
+  type: Image
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate

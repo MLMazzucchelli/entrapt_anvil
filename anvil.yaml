@@ -88,6 +88,7 @@ db_schema:
       type: string
     server: full
     title: Users
+metadata: {logo_img: 'asset:Icon_EntraPT.png'}
 name: EntraPTweb
 native_deps:
   head_html: |
