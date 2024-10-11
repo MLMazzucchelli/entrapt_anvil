@@ -9,6 +9,7 @@ import anvil.users
 import anvil.server
 import anvil.js
 from anvil.js.window import jQuery
+from ..Logout import Logout
 
 global entrapt_session_ID
 
@@ -29,7 +30,12 @@ class Form1(Form1Template):
 
     def tree_show(self, **event_args):
         # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
-        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)       
+        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)   
+        # Set the width of the tree DOM node using jQuery
+        jQuery(tree_dom_node).css({
+            "width": "300px",  # Fixed width
+            "overflow": "auto"  # Add scroll if content overflows
+        })
 
         # Initialize the Fancytree on the DOM node using jQuery
         jQuery(tree_dom_node).fancytree({
@@ -92,4 +98,8 @@ class Form1(Form1Template):
       """This method is called when the button is clicked"""
       anvil.server.call('clear_project_in_EntraPTc', entrapt_session_ID)      
       self.tree_refresh()
+
+    def log_out_click(self, **event_args):
+     anvil.users.logout()
+     open_form(Logout())
 
