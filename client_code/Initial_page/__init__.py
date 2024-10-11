@@ -12,7 +12,7 @@ from anvil.js.window import jQuery
 from .. import EntraPT
 from ..Logout import Logout
 from ..Project import Project
-
+from ..Calculate_entrapment import Calculate_entrapment
 class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -21,13 +21,14 @@ class Initial_page(Initial_pageTemplate):
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
-        EntraPT.session_ID = anvil.server.call('initialize_session')
-        self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
+        EntraPT.session_ID = anvil.server.call('initialize_session')        
         self.tree_show()
         
 
 
     def tree_show(self, **event_args):
+        # Get the data
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
         # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
         tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)   
         # Set the width of the tree DOM node using jQuery
@@ -66,17 +67,18 @@ class Initial_page(Initial_pageTemplate):
         if node:
             node.toggleSelected()
 
-    def get_selected_items_click(self, **event_args):
-        # Get the Fancytree instance
-        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
-        tree = jQuery(tree_dom_node).fancytree("getTree")
-        
-        # Get all selected nodes
-        selected_nodes = tree.getSelectedNodes()
-        
-        # Print the titles of selected nodes
-        selected_titles = [node.title for node in selected_nodes]
-        alert(selected_titles)
+    def get_selected_items_click(self, **event_args):  
+        alert(self.get_analyses_IDs_from_tree())
+
+
+    def get_analyses_IDs_from_tree(self):
+      tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
+      tree = jQuery(tree_dom_node).fancytree("getTree")
+      # Get all selected nodes
+      selected_nodes = tree.getSelectedNodes()
+      # Print the key of selected analyses
+      selected_keys = [node.key for node in selected_nodes]
+      return selected_keys
 
     def upload_project_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -110,4 +112,10 @@ class Initial_page(Initial_pageTemplate):
     def activate_project_page(self):
       self.content_panel.clear()
       self.content_panel.add_component(Project(), index=0)
+
+    def calculate_entrapment_tab_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.content_panel.clear()
+      self.content_panel.add_component(Calculate_entrapment(), index=0)
+
       

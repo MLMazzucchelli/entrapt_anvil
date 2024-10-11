@@ -19,7 +19,8 @@ components:
       name: new_analyses_tab_button
       properties: {align: center, background: 'theme:On Background', foreground: 'theme:Surface', spacing_above: small, spacing_below: small, text: Add New Analyses}
       type: Button
-    - layout_properties: {grid_position: 'BYLOKX,CNLANP'}
+    - event_bindings: {click: calculate_entrapment_tab_button_click}
+      layout_properties: {grid_position: 'BYLOKX,CNLANP'}
       name: calculate_entrapment_tab_button
       properties: {align: center, spacing_below: small, text: Calculate Entrapment}
       type: Button
