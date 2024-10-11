@@ -18,4 +18,4 @@ class Logout(LogoutTemplate):
 
   def sign_in_click(self, **event_args):
     anvil.users.login_with_form()
-    open_form('Form1')
+    open_form('Initial_page')

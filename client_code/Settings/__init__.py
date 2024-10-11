@@ -28,8 +28,7 @@ class Settings(SettingsTemplate):
     self.content_panel_settings.add_component(Project(), index=0)
 
   def log_out_click(self, **event_args):
-    self.content_panel_settings.clear()
-    self.content_panel_settings.add_component(Project(), index=0)
-
+    anvil.users.logout()
+    open_form(Logout())
 
 

@@ -59,16 +59,7 @@ class Initial_page(Initial_pageTemplate):
         self.status_label.text = f"Activate: {node.title}"
         self.tree_spacer.height = 300
 
-    def toggle_button_click(self, **event_args):
-        # Get the Fancytree instance and toggle the selection for Node2
-        tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
-        tree = jQuery(tree_dom_node).fancytree("getTree")
-        node = tree.getNodeByKey("Node2")
-        if node:
-            node.toggleSelected()
 
-    def get_selected_items_click(self, **event_args):  
-        alert(self.get_analyses_IDs_from_tree())
 
 
     def get_analyses_IDs_from_tree(self):
@@ -78,6 +69,7 @@ class Initial_page(Initial_pageTemplate):
       selected_nodes = tree.getSelectedNodes()
       # Print the key of selected analyses
       selected_keys = [node.key for node in selected_nodes]
+      alert(selected_keys)
       return selected_keys
 
     def upload_project_click(self, **event_args):

@@ -23,6 +23,10 @@ components:
   name: column_panel_1
   properties: {}
   type: ColumnPanel
+- layout_properties: {slot: logo}
+  name: label_1
+  properties: {align: center, font_size: 35, icon: 'fa:gears', icon_align: right}
+  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
