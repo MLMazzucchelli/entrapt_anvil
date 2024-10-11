@@ -41,7 +41,8 @@ class Form1(Form1Template):
 
 
     def tree_refresh(self):
-        # Refresh the tree with new data
+        # Refresh the tree with new data in project
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
         tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
         tree = jQuery(tree_dom_node).fancytree("getTree")
         tree.reload(self.tree_data)
@@ -85,6 +86,10 @@ class Form1(Form1Template):
           
       self.file_loader.clear()
       anvil.server.call("overwrite_project_in_EntraPTc",entrapt_session_ID, filename, file)
-      self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
+      self.tree_refresh()
+
+    def button_1_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      anvil.server.call('clear_project_in_EntraPTc', entrapt_session_ID)      
       self.tree_refresh()
 

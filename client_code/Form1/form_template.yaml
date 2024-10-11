@@ -5,6 +5,11 @@ components:
     name: file_loader
     properties: {}
     type: FileLoader
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'QQKLCL,RRSJVJ'}
+    name: button_1
+    properties: {text: Clear project}
+    type: Button
   layout_properties: {slot: default}
   name: column_panel_1
   properties: {col_widths: '{}'}
