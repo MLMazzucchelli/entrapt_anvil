@@ -1,4 +1,4 @@
-from ._anvil_designer import Form1Template
+from ._anvil_designer import Initial_pageTemplate
 from anvil import *
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
@@ -9,21 +9,20 @@ import anvil.users
 import anvil.server
 import anvil.js
 from anvil.js.window import jQuery
+from .. import EntraPT
 from ..Logout import Logout
+from ..Project import Project
 
-global entrapt_session_ID
-
-class Form1(Form1Template):
+class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        global entrapt_session_ID
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
-        entrapt_session_ID = anvil.server.call('initialize_session')
-        self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
+        EntraPT.session_ID = anvil.server.call('initialize_session')
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
         self.tree_show()
         
 
@@ -48,7 +47,7 @@ class Form1(Form1Template):
 
     def tree_refresh(self):
         # Refresh the tree with new data in project
-        self.tree_data = anvil.server.call('get_list_analyses_for_tree', entrapt_session_ID)
+        self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
         tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
         tree = jQuery(tree_dom_node).fancytree("getTree")
         tree.reload(self.tree_data)
@@ -91,15 +90,24 @@ class Form1(Form1Template):
           filename = anvil.server.call("put_project_in_table",file)
           
       self.file_loader.clear()
-      anvil.server.call("overwrite_project_in_EntraPTc",entrapt_session_ID, filename, file)
+      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, filename, file)
       self.tree_refresh()
 
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
-      anvil.server.call('clear_project_in_EntraPTc', entrapt_session_ID)      
+      anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)      
       self.tree_refresh()
 
     def log_out_click(self, **event_args):
      anvil.users.logout()
      open_form(Logout())
 
+    def Project_tab_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.content_panel.clear()
+      self.activate_project_page()
+
+    def activate_project_page(self):
+      self.content_panel.clear()
+      self.content_panel.add_component(Project(), index=0)
+      
