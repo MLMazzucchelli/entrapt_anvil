@@ -17,10 +17,8 @@ class Settings(SettingsTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    self.content_panel_settings.add_component(Project(), index=0)
 
-    def log_out_click(self, **event_args):
-     anvil.users.logout()
-     open_form(Logout())
 
   def project_click(self, **event_args):
     """This method is called when the button is clicked"""

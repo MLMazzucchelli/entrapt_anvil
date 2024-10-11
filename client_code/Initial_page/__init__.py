@@ -109,7 +109,7 @@ class Initial_page(Initial_pageTemplate):
 
     def settings_button_click(self, **event_args):
       modal = Settings()
-      alert(modal, large=True,buttons = [], dismissible = True)
+      alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
 
 
  
