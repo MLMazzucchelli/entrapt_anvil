@@ -91,6 +91,23 @@ class Initial_page(Initial_pageTemplate):
       #if clicked_item == "ciao"
         pass
 
+    def sidebar_menu_1_clicked(self, clicked_item, **event_args):
+      if clicked_item == "view_analyses":
+        self.content_panel.clear()
+        self.content_panel.add_component(Project(), index=0)
+
+      elif clicked_item == "new_project":
+        anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)      
+      elif clicked_item == "entrapment":
+        self.content_panel.clear()
+        self.content_panel.add_component(Calculate_entrapment(), index=0)
+        
+      elif clicked_item == "settings":
+        modal = Settings()
+        alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
+
+        
+ 
 
 
 

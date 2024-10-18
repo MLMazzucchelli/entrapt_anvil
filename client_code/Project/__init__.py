@@ -35,7 +35,5 @@ class Project(ProjectTemplate):
 
   def new_project_click(self, **event_args):
       """This method is called when the button is clicked"""
-      anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)      
-      get_open_form().tree_refresh()
-      self.update_project_data_grid()
+ 
     
