@@ -4,5 +4,14 @@ components:
   name: button_1
   properties: {text: Calculate Entrapment}
   type: Button
+- data_bindings: []
+  layout_properties: {grid_position: 'HVFECW,RLIBLE'}
+  name: tree_spacer
+  properties: {height: '300', tooltip: Workspace}
+  type: Spacer
+- layout_properties: {grid_position: 'HVFECW,WQRWMN'}
+  name: status_label
+  properties: {}
+  type: Label
 container: {type: ColumnPanel}
 is_package: true
