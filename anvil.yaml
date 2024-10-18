@@ -89,14 +89,14 @@ db_schema:
     server: full
     title: Users
 metadata: {logo_img: 'asset:Icon_EntraPT.png'}
-name: EntraPTweb
+name: EntraPT
 native_deps:
   head_html: |
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet" rel="preload" as="font" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.27.0/skin-lion/ui.fancytree.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.27.0/jquery.fancytree-all-deps.js"></script>
-    <div id="tree_dom_node" style="width: 800px; overflow: auto;"></div>
-package_name: EntraPTweb
+    <div id="tree_dom_node" style="width: 500px; overflow: auto;"></div>
+package_name: EntraPT
 runtime_options:
   client_version: '3'
   server_spec: {base: python310-standard}

@@ -18,11 +18,7 @@ def put_project_in_table(file):
   else:
     raise Exception("Cannot upload files this extension")  
 
-@anvil.server.callable
-def send_project_to_EntraPTc(session_ID, filename):
-  filename, file = get_file(filename)
-  output = anvil.server.call("receive_project_from_anvil", session_ID, filename, file)
-  return output
+
 
 def get_file(filename):
   search = app_tables.files.search(q.all_of(author=anvil.users.get_user(),filename=filename))

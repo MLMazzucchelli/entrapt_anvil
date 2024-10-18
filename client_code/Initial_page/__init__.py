@@ -23,7 +23,8 @@ class Initial_page(Initial_pageTemplate):
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
-        EntraPT.session_ID = anvil.server.call('initialize_session')        
+        EntraPT.session_ID = anvil.server.call('initialize_session')   
+        self.project_tab_button_click()
         self.tree_show()
         
 

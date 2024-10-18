@@ -24,14 +24,12 @@ class Project(ProjectTemplate):
 
   def file_loader_change(self, file, **event_args):
       """This method is called when a new file is loaded into this FileLoader"""
-      if self.file_loader.file.length > 1024*1024: #check the size before the file is uploaded
-          raise Exception("The uploaded project file is too large") 
-      else:
-          filename = anvil.server.call("put_project_in_table",file)
-      
-          
+      # if self.file_loader.file.length > 1024*1024: #check the size before the file is uploaded
+      #     raise Exception("The uploaded project file is too large") 
+      # else:
+      #     filename = anvil.server.call("put_project_in_table",file)     
+      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
       self.file_loader.clear()
-      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, filename, file)
       get_open_form().tree_refresh()
       self.update_project_data_grid()
 
