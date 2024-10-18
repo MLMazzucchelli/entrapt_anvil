@@ -99,8 +99,9 @@ class Initial_page(Initial_pageTemplate):
       elif clicked_item == "new_project":
         anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)  
 
-      elif cliked_item == "upload_project":
-        self.file_loader_change()
+      elif clicked_item == "upload_project":
+        anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
+        self.file_loader.clear()
         
       elif clicked_item == "entrapment":
         self.content_panel.clear()
@@ -109,12 +110,6 @@ class Initial_page(Initial_pageTemplate):
       elif clicked_item == "settings":
         modal = Settings()
         alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
-
-    def file_loader_change(self, file, **event_args):
-      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
-      self.file_loader.clear()
-      get_open_form().tree_refresh()
-      self.update_project_data_grid()
 
 
         

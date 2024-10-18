@@ -89,7 +89,7 @@ db_schema:
     server: full
     title: Users
 dependencies:
-- dep_id: dep_y11qsjmxhzaj1
+- dep_id: dep_k5afgxrmr4q1
   resolution_hints: {app_id: MCIW5MOJTVY55Q3I, name: sidebar_menu_entrapt, package_name: sidebar_menu_entrapt}
   version: {branch: master}
 metadata: {logo_img: 'asset:Icon_EntraPT.png'}
