@@ -13,6 +13,8 @@ from .. import EntraPT
 from ..Logout import Logout
 from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
+from ..View_data import View_data
+
 class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -87,29 +89,20 @@ class Initial_page(Initial_pageTemplate):
       anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, filename, file)
       self.tree_refresh()
 
-    def button_1_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID)      
-      self.tree_refresh()
-
-
-    def Project_tab_button_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      self.content_panel.clear()
-      self.activate_project_page()
-
-    def activate_project_page(self):
-      self.content_panel.clear()
-      self.content_panel.add_component(Project(), index=0)
-
     def calculate_entrapment_tab_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.content_panel.clear()
       self.content_panel.add_component(Calculate_entrapment(), index=0)
 
+
     def settings_button_click(self, **event_args):
       modal = Settings()
       alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
+
+    def view_data_button_click(self, **event_args):
+      self.content_panel.clear()
+      self.content_panel.add_component(View_data(), index=0)
+
 
 
  
