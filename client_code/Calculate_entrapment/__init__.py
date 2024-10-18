@@ -49,7 +49,24 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
       tree = jQuery(tree_dom_node).fancytree("getTree")
       tree.reload(self.tree_data)
 
+  def get_analyses_IDs_from_tree(self):
+      tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
+      tree = jQuery(tree_dom_node).fancytree("getTree")
+      # Get all selected nodes
+      selected_nodes = tree.getSelectedNodes()
+      # Print the key of selected analyses
+      selected_keys = [node.key for node in selected_nodes]
+      alert(selected_keys)
+      return selected_keys
+
+          
+  def update_status_label(self, node):
+        # Update the status label with the activated node
+        self.status_label.text = f"Activate: {node.title}"
+        self.tree_spacer.height = 300
+
+
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    IDs = get_open_form().get_analyses_IDs_from_tree()
+    IDs = self.get_analyses_IDs_from_tree()
     anvil.server.call("calculate_entrapment", EntraPT.session_ID, IDs, 300, 1200, 100)
