@@ -1,0 +1,8 @@
+components:
+- event_bindings: {click: view_selected_analysis_button_click}
+  layout_properties: {column: PTMKTE}
+  name: view_selected_analysis_button
+  properties: {icon: 'fa:external-link', text: ''}
+  type: Button
+container: {type: DataRowPanel}
+is_package: true

@@ -13,7 +13,7 @@ from .. import EntraPT
 from ..Logout import Logout
 from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
-from ..View_data import View_data
+from ..Project import Project
 
 class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
@@ -61,9 +61,6 @@ class Initial_page(Initial_pageTemplate):
         self.status_label.text = f"Activate: {node.title}"
         self.tree_spacer.height = 300
 
-
-
-
     def get_analyses_IDs_from_tree(self):
       tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
       tree = jQuery(tree_dom_node).fancytree("getTree")
@@ -73,21 +70,6 @@ class Initial_page(Initial_pageTemplate):
       selected_keys = [node.key for node in selected_nodes]
       alert(selected_keys)
       return selected_keys
-
-    def upload_project_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      anvil.server.call('put_project_in_table')
-
-    def file_loader_change(self, file, **event_args):
-      """This method is called when a new file is loaded into this FileLoader"""
-      if self.file_loader.file.length > 1024*1024: #check the size before the file is uploaded
-          raise Exception("The uploaded project file is too large") 
-      else:
-          filename = anvil.server.call("put_project_in_table",file)
-          
-      self.file_loader.clear()
-      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, filename, file)
-      self.tree_refresh()
 
     def calculate_entrapment_tab_button_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -99,9 +81,10 @@ class Initial_page(Initial_pageTemplate):
       modal = Settings()
       alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
 
-    def view_data_button_click(self, **event_args):
+    def project_tab_button_click(self, **event_args):
       self.content_panel.clear()
-      self.content_panel.add_component(View_data(), index=0)
+      self.content_panel.add_component(Project(), index=0)
+
 
 
 

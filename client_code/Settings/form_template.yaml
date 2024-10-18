@@ -9,11 +9,6 @@ components:
   properties: {}
   type: ColumnPanel
 - components:
-  - event_bindings: {click: project_click}
-    layout_properties: {grid_position: 'ZXSLTR,VVBIHH'}
-    name: project
-    properties: {text: Project}
-    type: Button
   - event_bindings: {click: log_out_click}
     layout_properties: {grid_position: 'STTART,WIOGOY'}
     name: log_out

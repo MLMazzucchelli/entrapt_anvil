@@ -1,27 +1,33 @@
 components:
 - components:
-  - layout_properties: {full_width_row: true, grid_position: 'WCRNUZ,ULJHQB'}
-    name: label_1
-    properties: {align: center, bold: true, font_size: 20, text: PROJECT}
-    type: Label
-  layout_properties: {full_width_row: true, grid_position: 'FHTIVL,DXVBPI'}
-  name: column_panel_2
-  properties: {}
-  type: ColumnPanel
-- components:
-  - event_bindings: {change: file_loader_change}
-    layout_properties: {grid_position: 'JMYLQQ,ATPJVK'}
-    name: file_loader
-    properties: {text: Upload Project}
-    type: FileLoader
   - event_bindings: {click: new_project_click}
-    layout_properties: {grid_position: 'JMYLQQ,CHDPON'}
+    layout_properties: {grid_position: 'BWQIYG,RYCICK'}
     name: new_project
     properties: {text: New project}
     type: Button
-  layout_properties: {full_width_row: true, grid_position: 'DOVYGO,FGYQNG'}
+  - event_bindings: {change: file_loader_change}
+    layout_properties: {grid_position: 'BWQIYG,YKAIXW'}
+    name: file_loader
+    properties: {text: Upload Project}
+    type: FileLoader
+  layout_properties: {grid_position: 'XLAPQH,MQVVPE'}
   name: column_panel_1
   properties: {}
   type: ColumnPanel
+- components:
+  - name: repeating_panel_1
+    properties: {item_template: Project.RowTemplate1}
+    type: RepeatingPanel
+  layout_properties: {grid_position: 'EWOCSW,FSBYNQ'}
+  name: data_grid_analyses
+  properties:
+    columns:
+    - {data_key: column_1, id: PTMKTE, title: View analysis}
+    - {data_key: full_label, id: JKSDUP, title: Full label}
+    - {data_key: host_phase, id: VJQQOR, title: Host phase}
+    - {data_key: inclusion_phase, id: OJLQEN, title: Inclusion phase}
+    - {data_key: residual_strain, id: NTOQAT, title: Residual strain}
+    - {data_key: residual_stress, id: GAWGTF, title: Residual stress}
+  type: DataGrid
 container: {type: ColumnPanel}
 is_package: true

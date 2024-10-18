@@ -1,0 +1,7 @@
+components:
+- layout_properties: {grid_position: 'UDCSWC,PNMQDB'}
+  name: HIsystem_properties_text
+  properties: {auto_expand: true, enabled: false, height: '100'}
+  type: TextArea
+container: {type: ColumnPanel}
+is_package: true

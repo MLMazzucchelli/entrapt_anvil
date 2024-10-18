@@ -14,3 +14,5 @@ from anvil.tables import app_tables
 #
 
 global session_ID
+global current_analysis_ID
+global current_analysis_label
