@@ -15,6 +15,7 @@ from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 from ..Project import Project
 
+
 class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
