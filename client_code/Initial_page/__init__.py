@@ -26,7 +26,7 @@ class Initial_page(Initial_pageTemplate):
         anvil.server.call('ensure_user')
         EntraPT.session_ID = anvil.server.call('initialize_session')   
         self.project_tab_button_click()
-        self.tree_show()
+        #self.tree_show()
         
 
 
@@ -88,8 +88,8 @@ class Initial_page(Initial_pageTemplate):
       self.content_panel.add_component(Project(), index=0)
 
     def sidebar_menu_clicked(self, clicked_item, **event_args):
-      if clicked_item == ""
-      pass
+      #if clicked_item == "ciao"
+        pass
 
 
 

@@ -33,6 +33,10 @@ components:
   properties: {col_widths: '{}', role: null}
   type: ColumnPanel
 - components:
+  - layout_properties: {grid_position: 'FXSVYK,YVKBDX'}
+    name: sidebar_menu_1
+    properties: {}
+    type: form:dep_y11qsjmxhzaj1:SidebarMenu
   - event_bindings: {click: settings_button_click}
     layout_properties: {grid_position: 'DWLEPH,OLWFJG'}
     name: settings_button
