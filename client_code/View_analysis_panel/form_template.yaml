@@ -1,28 +1,26 @@
 components:
 - components:
+  - event_bindings: {click: HIsystem_properties_button_click}
+    layout_properties: {grid_position: 'SJRIWD,PFSJUQ'}
+    name: HIsystem_properties_button
+    properties: {text: Properties}
+    type: Button
+  - layout_properties: {grid_position: 'SJRIWD,UZGKEK'}
+    name: button_2
+    properties: {text: button_2}
+    type: Button
+  layout_properties: {grid_position: 'XMQSCV,XYWKEV'}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+- components:
   - layout_properties: {grid_position: 'SEXVDQ,HBKZNV'}
     name: content_panel_view_analysis
     properties: {}
     type: ColumnPanel
-  layout_properties: {slot: default}
+  layout_properties: {grid_position: 'IWJYCO,ABYZFC'}
   name: content_panel
   properties: {}
   type: ColumnPanel
-- components:
-  - layout_properties: {grid_position: 'MNZIZS,DQXIXH'}
-    name: isomeke
-    properties: {text: isomeke}
-    type: Button
-  - event_bindings: {click: HIsystem_properties_click}
-    layout_properties: {grid_position: 'JEEAGB,OVRZXG'}
-    name: HIsystem_properties
-    properties: {text: Properties}
-    type: Button
-  layout_properties: {slot: left-nav}
-  name: column_panel_1
-  properties: {}
-  type: ColumnPanel
-container:
-  properties: {html: '@theme:standard-page.html', visible: true}
-  type: HtmlTemplate
+container: {type: ColumnPanel}
 is_package: true

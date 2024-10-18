@@ -1,17 +1,17 @@
 components:
+- data_bindings: []
+  layout_properties: {grid_position: 'HVFECW,HHNRFE HNSNFC,BINKMH'}
+  name: tree_spacer
+  properties: {height: '300', tooltip: Workspace}
+  type: Spacer
+- layout_properties: {grid_position: 'HVFECW,HHNRFE ZQXJLJ,FENVLP'}
+  name: status_label
+  properties: {}
+  type: Label
 - event_bindings: {click: button_1_click}
   layout_properties: {grid_position: 'HVFECW,EJAPPS'}
   name: button_1
   properties: {text: Calculate Entrapment}
   type: Button
-- data_bindings: []
-  layout_properties: {grid_position: 'HVFECW,RLIBLE'}
-  name: tree_spacer
-  properties: {height: '300', tooltip: Workspace}
-  type: Spacer
-- layout_properties: {grid_position: 'HVFECW,WQRWMN'}
-  name: status_label
-  properties: {}
-  type: Label
 container: {type: ColumnPanel}
 is_package: true

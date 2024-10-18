@@ -3,22 +3,12 @@ components:
   name: spacer_1
   properties: {height: 32}
   type: Spacer
+- event_bindings: {change: file_loader_change}
+  layout_properties: {grid_position: 'AVCOHF,HFOKGF'}
+  name: file_loader
+  properties: {text: Upload Project}
+  type: FileLoader
 - components:
-  - components:
-    - event_bindings: {click: new_project_click}
-      layout_properties: {full_width_row: true, grid_position: 'XLUPFA,MYZRJM'}
-      name: new_project
-      properties: {text: New project}
-      type: Button
-    - event_bindings: {change: file_loader_change}
-      layout_properties: {full_width_row: true, grid_position: 'YCEQYW,RZUEUV'}
-      name: file_loader
-      properties: {text: Upload Project}
-      type: FileLoader
-    layout_properties: {full_width_row: true, grid_position: 'ACDHJR,CJDMOB'}
-    name: column_panel_1
-    properties: {background: '', col_spacing: medium}
-    type: ColumnPanel
   - components:
     - name: repeating_panel_1
       properties: {item_template: Project.RowTemplate1}

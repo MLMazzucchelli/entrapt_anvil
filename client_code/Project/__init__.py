@@ -30,10 +30,9 @@ class Project(ProjectTemplate):
       #     filename = anvil.server.call("put_project_in_table",file)     
       anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
       self.file_loader.clear()
-      get_open_form().tree_refresh()
+      #get_open_form().tree_refresh()
       self.update_project_data_grid()
 
-  def new_project_click(self, **event_args):
-      """This method is called when the button is clicked"""
+
  
     
