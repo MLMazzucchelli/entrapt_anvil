@@ -2,24 +2,23 @@ components:
 - components:
   - components:
     - data_bindings: []
-      layout_properties: {grid_position: 'OROPPP,FTAQBT'}
       name: tree_spacer
       properties: {height: '300', tooltip: Workspace}
       type: Spacer
-    layout_properties: {full_width_row: true, grid_position: 'WHSWQZ,TVDCFQ', row_background: ''}
-    name: column_panel_2
+    layout_properties: {full_width_row: false, grid_position: 'EHBUQN,XYJEXB', row_background: '#ffffff'}
+    name: linear_panel_1
     properties: {}
-    type: ColumnPanel
+    type: LinearPanel
   - event_bindings: {click: button_1_click}
-    layout_properties: {full_width_row: true, grid_position: 'WHSWQZ,EUGTSS TORDZY,BEGETK'}
+    layout_properties: {grid_position: 'EHBUQN,PSJSLV QIPJXT,RDDYZC'}
     name: button_1
-    properties: {text: Calculate Entrapment}
+    properties: {background: 'theme:Primary Container', text: Calculate Entrapment}
     type: Button
-  - layout_properties: {full_width_row: true, grid_position: 'WHSWQZ,EUGTSS EHBUQN,PSJSLV'}
+  - layout_properties: {full_width_row: true, grid_position: 'EHBUQN,PSJSLV MENNNV,LEGIEF', row_background: ''}
     name: status_label
     properties: {}
     type: Label
-  layout_properties: {full_width_row: true, grid_position: 'AFBMDJ,MEIPGI'}
+  layout_properties: {full_width_row: false, grid_position: 'AFBMDJ,MEIPGI', row_background: ''}
   name: column_panel_1
   properties: {}
   type: ColumnPanel

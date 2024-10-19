@@ -1,13 +1,4 @@
 components:
-- layout_properties: {full_width_row: true, grid_position: 'JVEVPC,PFRXFH'}
-  name: spacer_1
-  properties: {height: 32}
-  type: Spacer
-- event_bindings: {change: file_loader_change}
-  layout_properties: {grid_position: 'AVCOHF,HFOKGF'}
-  name: file_loader
-  properties: {text: Upload Project}
-  type: FileLoader
 - components:
   - components:
     - name: repeating_panel_1

@@ -18,6 +18,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
 
     # Any code you write here will run before the form opens.
     self.tree_show()
+    
 
 
   
@@ -29,7 +30,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
       tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)   
       # Set the width of the tree DOM node using jQuery
       jQuery(tree_dom_node).css({
-          "width": "300px",  # Fixed width
+          "width": "450px",  # Fixed width
           "overflow": "auto"  # Add scroll if content overflows
       })
 

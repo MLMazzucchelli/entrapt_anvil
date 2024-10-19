@@ -9,6 +9,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import EntraPT
 
+# This code displays an Anvil alert, rather than
+# the default red box, when an error occurs.
+
+def error_handler(err):
+  alert(str(err), title="An error has occurred")
+
+set_default_error_handling(error_handler)
 
 class Project(ProjectTemplate):
   def __init__(self, **properties):
@@ -21,17 +28,6 @@ class Project(ProjectTemplate):
 
   def update_project_data_grid(self):
       self.repeating_panel_1.items = anvil.server.call('get_list_analyses_for_view_data', EntraPT.session_ID)
-
-  def file_loader_change(self, file, **event_args):
-      """This method is called when a new file is loaded into this FileLoader"""
-      # if self.file_loader.file.length > 1024*1024: #check the size before the file is uploaded
-      #     raise Exception("The uploaded project file is too large") 
-      # else:
-      #     filename = anvil.server.call("put_project_in_table",file)     
-      anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
-      self.file_loader.clear()
-      #get_open_form().tree_refresh()
-      self.update_project_data_grid()
 
 
  

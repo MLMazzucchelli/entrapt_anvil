@@ -24,30 +24,12 @@ class Initial_page(Initial_pageTemplate):
         anvil.users.login_with_form()
         anvil.server.call('ensure_user')
         EntraPT.session_ID = anvil.server.call('initialize_session')   
-        self.project_tab_button_click()
+        self.content_panel.clear()
+        self.content_panel.add_component(Project(), index=0)
         
-        
 
-
-    def calculate_entrapment_tab_button_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      self.content_panel.clear()
-      self.content_panel.add_component(Calculate_entrapment(), index=0)
-
-
-    def settings_button_click(self, **event_args):
-      modal = Settings()
-      alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
-
-    def project_tab_button_click(self, **event_args):
-      self.content_panel.clear()
-      self.content_panel.add_component(Project(), index=0)
-
-    def sidebar_menu_clicked(self, clicked_item, **event_args):
-      #if clicked_item == "ciao"
-        pass
-
-    def sidebar_menu_1_clicked(self, clicked_item, **event_args):
+    def sidebar_menu_1_clicked(self, clicked_item, file, **event_args):
+      
       if clicked_item == "view_analyses":
         self.content_panel.clear()
         self.content_panel.add_component(Project(), index=0)
