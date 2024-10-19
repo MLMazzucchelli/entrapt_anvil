@@ -100,6 +100,12 @@ native_deps:
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.27.0/skin-lion/ui.fancytree.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.27.0/jquery.fancytree-all-deps.js"></script>
     <div id="tree_dom_node" style="width: 500px; overflow: auto;"></div>
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 package_name: EntraPT
 runtime_options:
   client_version: '3'

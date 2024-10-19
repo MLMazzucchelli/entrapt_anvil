@@ -1058,3 +1058,33 @@ div.plot-container.plotly svg.main-svg {
 .anvil-role-submenu-item{
     
 }*/
+
+
+/*
+Animate spinning. Instructions at https://anvil.works/forum/t/replace-your-loading-spinner-with-an-animated-image/7001
+*/
+#loadingSpinner {
+    -webkit-animation: fadeInDown;
+    animation: fadeInDown;
+  	animation-duration: 5s;
+    animation-iteration-count: infinite;
+    width: 300px;
+    height:70px;
+    margin-left: -120px;
+    border-radius: 0;
+    box-shadow: none;/*0px 0px 10px 10px #fcfcfc;*/
+    background-color: transparent;
+    background-image: url(https://qfxlg7drlogfh3o5.anvil.app/XJTRF4CWKSFL4E252NEKX6Z5/_/theme/logo_EntraPT_nobackground.png) !important;
+}
+
+#loadingSpinner::after {
+    content: "Please wait while we initialize your session..."; /* Text you want to display */
+    position: absolute;
+    bottom: -70px; /* Adjust this to control where the text appears */
+    left: 55%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    white-space: nowrap;
+    color: #555; /* Customize text color */
+}
+

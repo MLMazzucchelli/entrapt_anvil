@@ -13,6 +13,8 @@ from ..Logout import Logout
 from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 from ..Project import Project
+from .. import Error_handling
+
 
 
 class Initial_page(Initial_pageTemplate):

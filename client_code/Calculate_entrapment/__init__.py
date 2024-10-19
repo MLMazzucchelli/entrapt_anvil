@@ -9,6 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil.js.window import jQuery
 from .. import EntraPT
+from .. import Error_handling
 
 
 class Calculate_entrapment(Calculate_entrapmentTemplate):
@@ -25,7 +26,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
 
   def tree_show(self, **event_args):
       # Get the data
-      self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
+      self.tree_data = anvil.server.call_s('get_list_analyses_for_tree', EntraPT.session_ID)
       # Get the DOM node for the Anvil spacer component where you want to initialize the Fancytree
       tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)   
       # Set the width of the tree DOM node using jQuery
@@ -45,7 +46,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
 
   def tree_refresh(self):
       # Refresh the tree with new data in project
-      self.tree_data = anvil.server.call('get_list_analyses_for_tree', EntraPT.session_ID)
+      self.tree_data = anvil.server.call_s('get_list_analyses_for_tree', EntraPT.session_ID)
       tree_dom_node = anvil.js.get_dom_node(self.tree_spacer)
       tree = jQuery(tree_dom_node).fancytree("getTree")
       tree.reload(self.tree_data)
@@ -70,4 +71,4 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
     IDs = self.get_analyses_IDs_from_tree()
-    anvil.server.call("calculate_entrapment", EntraPT.session_ID, IDs, 300, 1200, 100)
+    anvil.server.call_s("calculate_entrapment", EntraPT.session_ID, IDs, 300, 1200, 100)
