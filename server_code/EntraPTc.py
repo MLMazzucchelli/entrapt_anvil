@@ -19,6 +19,13 @@ def put_project_in_table(file):
     raise Exception("Cannot upload files this extension")  
 
 
+@anvil.server.callable
+def get_tutorial_project():
+  search = app_tables.files.search(q.all_of(filename="tutorial_project"))
+  row = search[0]
+  file = row["file"]
+  return file
+  
 
 def get_file(filename):
   search = app_tables.files.search(q.all_of(author=anvil.users.get_user(),filename=filename))

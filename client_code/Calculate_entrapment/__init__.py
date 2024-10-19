@@ -8,8 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil.js.window import jQuery
-from .. import EntraPT
-from .. import Error_handling
+from .. import EntraPT, Error_handling, Loading
 
 
 class Calculate_entrapment(Calculate_entrapmentTemplate):
@@ -58,7 +57,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
       selected_nodes = tree.getSelectedNodes()
       # Print the key of selected analyses
       selected_keys = [node.key for node in selected_nodes]
-      alert(selected_keys)
+      #alert(selected_keys)
       return selected_keys
 
           
@@ -68,7 +67,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
         self.tree_spacer.height = 300
 
 
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    IDs = self.get_analyses_IDs_from_tree()
-    anvil.server.call_s("calculate_entrapment", EntraPT.session_ID, IDs, 300, 1200, 100)
+  def calculate_entrapment_button_click(self, **event_args):
+    with Loading.Loading('Please wait, calculation in progress...'):
+      IDs = self.get_analyses_IDs_from_tree()
+      anvil.server.call_s("calculate_entrapment", EntraPT.session_ID, IDs, 300, 1200, 100)

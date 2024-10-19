@@ -8,12 +8,12 @@ from anvil.tables import app_tables
 import anvil.users
 import anvil.server
 import anvil.js
-from .. import EntraPT
+from .. import EntraPT, Error_handling, Loading
 from ..Logout import Logout
 from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 from ..Project import Project
-from .. import Error_handling
+
 
 
 
@@ -24,7 +24,7 @@ class Initial_page(Initial_pageTemplate):
 
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
-        anvil.server.call('ensure_user')
+        anvil.server.call_s('ensure_user')
         EntraPT.session_ID = anvil.server.call('initialize_session')   
         self.content_panel.clear()
         self.content_panel.add_component(Project(), index=0)
@@ -37,14 +37,15 @@ class Initial_page(Initial_pageTemplate):
         self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "new_project":
-        anvil.server.call('clear_project_in_EntraPTc', EntraPT.session_ID) 
+        anvil.server.call_s('clear_project_in_EntraPTc', EntraPT.session_ID) 
         self.content_panel.clear()
         self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "upload_project":
-        anvil.server.call("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
-        self.content_panel.clear()
-        self.content_panel.add_component(Project(), index=0)
+        with Loading.Loading('Please wait, we are importing your project...'):
+          anvil.server.call_s("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
+          self.content_panel.clear()
+          self.content_panel.add_component(Project(), index=0)
         
       elif clicked_item == "entrapment":
         self.content_panel.clear()

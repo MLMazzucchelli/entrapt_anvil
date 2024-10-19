@@ -8,6 +8,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Logout import Logout
+from .. import EntraPT, Loading
+from ..Project import Project
 
 
 class Settings(SettingsTemplate):
@@ -20,3 +22,12 @@ class Settings(SettingsTemplate):
   def log_out_click(self, **event_args):
     anvil.users.logout()
     open_form(Logout())
+    self.raise_event("x-close-alert", value=42)
+
+  def load_tutorial_project_button_click(self, **event_args):
+    with Loading.Loading('Please wait, we are loading the tutorial...'):
+      file = anvil.server.call_s("get_tutorial_project")
+      anvil.server.call_s("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
+      get_open_form().content_panel.clear()
+      get_open_form().content_panel.add_component(Project(), index=0)
+      self.raise_event("x-close-alert", value=42)

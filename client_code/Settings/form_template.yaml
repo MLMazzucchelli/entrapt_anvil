@@ -15,10 +15,20 @@ components:
   name: spacer_1
   properties: {height: '2'}
   type: Spacer
-- layout_properties: {full_width_row: true, grid_position: 'ITEWLS,INWXMO'}
-  name: label_1_copy_2
-  properties: {bold: true, icon: 'fa:question-circle', text: Help}
-  type: Label
+- components:
+  - layout_properties: {full_width_row: true, grid_position: 'PQDAXO,MBAZUM'}
+    name: help_label
+    properties: {bold: true, icon: 'fa:question-circle', text: Help}
+    type: Label
+  - event_bindings: {click: load_tutorial_project_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'DIZBNI,TFLKQB'}
+    name: load_tutorial_project_button
+    properties: {align: left, background: 'theme:Primary Container', text: Load tutorial}
+    type: Button
+  layout_properties: {full_width_row: true, grid_position: 'DGHNCJ,MGDSUU'}
+  name: help_panel
+  properties: {}
+  type: ColumnPanel
 - layout_properties: {full_width_row: true, grid_position: 'JKLWDM,IKYJFD', row_background: '#f2f2f2'}
   name: spacer_1_copy_2
   properties: {height: '2'}
@@ -28,17 +38,27 @@ components:
   properties: {bold: true, icon: 'fa:user', text: Account}
   type: Label
 - event_bindings: {click: log_out_click}
-  layout_properties: {grid_position: 'STRRTQ,IRIUGO'}
+  layout_properties: {full_width_row: true, grid_position: 'STRRTQ,IRIUGO'}
   name: log_out
-  properties: {background: 'theme:Primary Container', text: Log out}
+  properties: {align: left, background: 'theme:Primary Container', text: Log out}
   type: Button
 - layout_properties: {full_width_row: true, grid_position: 'WUXMHA,JQLRBF', row_background: '#f2f2f2'}
   name: spacer_1_copy_2_copy
   properties: {height: '2'}
   type: Spacer
-- layout_properties: {full_width_row: true, grid_position: 'JKYQVD,VSQHMG'}
-  name: label_1_copy_3
-  properties: {bold: true, icon: 'fa:info-circle', text: About}
-  type: Label
+- components:
+  - layout_properties: {full_width_row: true, grid_position: 'YLRSRM,GPWSGO'}
+    name: about_label
+    properties: {bold: true, icon: 'fa:info-circle', text: About}
+    type: Label
+  - layout_properties: {full_width_row: true, grid_position: 'ZOJARO,RGULRT'}
+    name: about_content
+    properties:
+      text: "Io amo tanto Alice\n\nAuthors: M.L.Mazzucchelli, R.J.Angel, M.Alvaro\n\nThanks to:\nMattia Bonazzi (UniPavia), Laura Brandolini (UniPavia), Nicola Campomenosi (UniGenova), Marco Cuman, Mattia Gilio (UniPavia), Alice Girani (ETH Zurich), Joseph Gonzalez (UniPavia), Dario Lanterna (UniPavia), Giulia Mingardi (UniPavia), Marta Morana (UniPavia), Michelangelo Parvis, Greta Rustioni (BGI Bayreuth), Hugo van Schrojenstein Lantman (UniOslo)   "
+    type: Label
+  layout_properties: {full_width_row: true, grid_position: 'HEPWBA,USLBUT'}
+  name: about_panel
+  properties: {}
+  type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true
