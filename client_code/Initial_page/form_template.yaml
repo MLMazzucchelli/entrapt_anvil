@@ -12,7 +12,7 @@ components:
   - event_bindings: {tick: timer_to_close_EntraPTc_session_tick}
     layout_properties: {grid_position: 'JNHAFF,LXZOGP'}
     name: timer_to_close_EntraPTc_session
-    properties: {interval: 120}
+    properties: {interval: 300}
     type: Timer
   layout_properties: {slot: default}
   name: column_panel_1

@@ -5,7 +5,7 @@ components:
   type: Label
 - layout_properties: {full_width_row: true, grid_position: 'KZZWHY,ZMQPHT'}
   name: label_2
-  properties: {align: center, text: 'Do you want to keep ths session active?'}
+  properties: {align: center, text: 'Do you want to keep this session active?'}
   type: Label
 - event_bindings: {tick: timer_session_timeout_popup_tick}
   layout_properties: {grid_position: 'LGFYUT,QHXOPE'}

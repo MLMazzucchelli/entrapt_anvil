@@ -16,4 +16,4 @@ class View_HIsystem_properties(View_HIsystem_propertiesTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
-    self.HIsystem_properties_text.text = anvil.server.call('get_HIsystem_properties', EntraPT.session_ID, EntraPT.current_analysis_ID)
+    self.HIsystem_properties_text.text = anvil.server.call_s('get_HIsystem_properties', EntraPT.session_ID, EntraPT.current_analysis_ID)

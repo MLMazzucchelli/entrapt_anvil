@@ -26,7 +26,7 @@ class Settings(SettingsTemplate):
         self.raise_event("x-close-alert", value=42)   
 
   def load_tutorial_project_button_click(self, **event_args):
-    with Loading.Loading('Please wait, we are loading the tutorial...'):
+    with Loading.Loading('Please wait while we load the tutorial...'):
       file = anvil.server.call_s("get_tutorial_project")
       anvil.server.call_s("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
       get_open_form().content_panel.clear()

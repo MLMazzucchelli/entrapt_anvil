@@ -45,7 +45,7 @@ class Initial_page(Initial_pageTemplate):
         self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "upload_project":
-        with Loading.Loading('Please wait, we are importing your project...'):
+        with Loading.Loading('Please wait while we import your project...'):
           anvil.server.call_s("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
           self.content_panel.clear()
           self.content_panel.add_component(Project(), index=0)
