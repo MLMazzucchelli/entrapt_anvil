@@ -13,6 +13,7 @@ from ..Logout import Logout
 from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 from ..Project import Project
+from ..Session_timeout import Session_timeout
 
 
 
@@ -25,9 +26,11 @@ class Initial_page(Initial_pageTemplate):
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
         anvil.server.call_s('ensure_user')
-        EntraPT.session_ID = anvil.server.call('initialize_session')   
+        EntraPT.session_ID = anvil.server.call('initialize_session')  
+        
         self.content_panel.clear()
         self.content_panel.add_component(Project(), index=0)
+        
         
 
     def sidebar_menu_1_clicked(self, clicked_item, file, **event_args):
@@ -54,6 +57,20 @@ class Initial_page(Initial_pageTemplate):
       elif clicked_item == "settings":
         modal = Settings()
         alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
+
+    def timer_to_close_EntraPTc_session_tick(self, **event_args):
+      modal = Session_timeout()
+      results = alert(modal, large=True, buttons = [("Yes", "YES"),("No", "NO"),], dismissible = False)
+      if results == ("Yes"):
+        pass
+      elif results == ("No"):
+        anvil.server.call_s("close_current_EntraPTc_session")
+        anvil.users.logout()
+        open_form(Logout())
+        self.raise_event("x-close-alert", value=42)    
+    
+
+        
 
 
         

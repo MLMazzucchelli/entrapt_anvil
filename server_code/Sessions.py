@@ -71,11 +71,16 @@ def get_all_active_sessions():
                                   status = "active"))
   return rows
 
+@anvil.server.callable
+def remove_current_session_from_database():
+  rows = get_all_active_sessions()
+  for row in rows:
+    row.delete()
+  return
 
-
-def is_session_active():
-  pass
-
-
-def delete_session():
+@anvil.server.callable
+def close_current_EntraPTc_session():
+  rows = get_all_active_sessions()
+  anvil.server.call("delete_EntraPTc_session",rows[0]["entrapt_session_ID"])
+  remove_current_session_from_database()
   pass

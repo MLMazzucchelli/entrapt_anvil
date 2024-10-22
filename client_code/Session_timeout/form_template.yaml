@@ -1,0 +1,16 @@
+components:
+- layout_properties: {full_width_row: true, grid_position: 'WJKCPM,WENKLC'}
+  name: session_timeout_message
+  properties: {align: center, text: ''}
+  type: Label
+- layout_properties: {full_width_row: true, grid_position: 'KZZWHY,ZMQPHT'}
+  name: label_2
+  properties: {align: center, text: 'Do you want to keep ths session active?'}
+  type: Label
+- event_bindings: {tick: timer_session_timeout_popup_tick}
+  layout_properties: {grid_position: 'LGFYUT,QHXOPE'}
+  name: timer_session_timeout_popup
+  properties: {interval: 60}
+  type: Timer
+container: {type: ColumnPanel}
+is_package: true
