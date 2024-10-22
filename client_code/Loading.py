@@ -1,3 +1,4 @@
+#This modules creates a wait bar that block the execution of the app
 from anvil import *
 import anvil.server
 import anvil.js

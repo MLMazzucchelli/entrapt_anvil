@@ -70,3 +70,12 @@ def get_all_active_sessions():
                                   user_email=anvil.users.get_user()['email'],
                                   status = "active"))
   return rows
+
+
+
+def is_session_active():
+  pass
+
+
+def delete_session():
+  pass
