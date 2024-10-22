@@ -23,6 +23,7 @@ global current_analysis_label
 def close_current_EntraPTc_session():
     try:
       anvil.server.call_s("close_current_EntraPTc_session")
+      anvil.server.call_s("remove_orphan_sessions") #WARNING: In future this must be moved to a scheduled Task on server side
     except anvil.server.SessionExpiredError:
       alert("Session is expired")
     anvil.users.logout()

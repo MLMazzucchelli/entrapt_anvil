@@ -41,8 +41,8 @@ def initialize_session(forceNewSession=False):
 @anvil.server.callable
 def set_session_ID():
   browser_session_ID = anvil.server.get_session_id() #Get the id of the current browser session of Anvil
-  #Get the entrapt session of the user if it exists
-  all_sessions = get_all_active_sessions()
+  #Get the EntraPTc session of the user if it exists
+  all_sessions = get_all_active_sessions_current_user()
   if len(all_sessions):
     #There is already at least one active entrapt session for the current browser window.
     session_ID = all_sessions[0]['entrapt_session_ID']
@@ -64,7 +64,7 @@ def register_session_in_database(browser_session_ID):
 
 
 
-def get_all_active_sessions():
+def get_all_active_sessions_current_user():
   #Get all the active eosfit sessions of the current user
   rows = app_tables.sessions.search(q.all_of(
                                   user_email=anvil.users.get_user()['email'],
@@ -73,14 +73,27 @@ def get_all_active_sessions():
 
 @anvil.server.callable
 def remove_current_session_from_database():
-  rows = get_all_active_sessions()
+  rows = get_all_active_sessions_current_user()
   for row in rows:
     row.delete()
   return
 
 @anvil.server.callable
 def close_current_EntraPTc_session():
-  rows = get_all_active_sessions()
-  anvil.server.call("delete_EntraPTc_session",rows[0]["entrapt_session_ID"])
+  rows = get_all_active_sessions_current_user()
+  anvil.server.call("delete_EntraPTc_sessions",[rows[0]["entrapt_session_ID"]])
   remove_current_session_from_database()
   pass
+  
+@anvil.server.callable
+def remove_orphan_sessions():
+  EntraPTc_sessions = anvil.server.call("get_names_of_all_active_sessions")
+  rows = app_tables.sessions.search()
+  sessions_in_database = list()
+  for row in rows: 
+     sessions_in_database.append(row["entrapt_session_ID"])
+     if row["entrapt_session_ID"] not in EntraPTc_sessions: #Delete sessions in Anvil since they are not active anymore in EntraPTc
+       row.delete()
+
+  sessions_to_be_deleted_in_EntraPTc = list(set(EntraPTc_sessions) - set(sessions_in_database))
+  anvil.server.call("delete_EntraPTc_sessions",sessions_to_be_deleted_in_EntraPTc)
