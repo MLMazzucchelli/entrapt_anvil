@@ -53,8 +53,7 @@ components:
     type: Label
   - layout_properties: {full_width_row: true, grid_position: 'ZOJARO,RGULRT'}
     name: about_content
-    properties:
-      text: "Io amo tanto Alice\n\nAuthors: M.L.Mazzucchelli, R.J.Angel, M.Alvaro\n\nThanks to:\nMattia Bonazzi (UniPavia), Laura Brandolini (UniPavia), Nicola Campomenosi (UniGenova), Marco Cuman, Mattia Gilio (UniPavia), Alice Girani (ETH Zurich), Joseph Gonzalez (UniPavia), Dario Lanterna (UniPavia), Giulia Mingardi (UniPavia), Marta Morana (UniPavia), Michelangelo Parvis, Greta Rustioni (BGI Bayreuth), Hugo van Schrojenstein Lantman (UniOslo)   "
+    properties: {text: 'Authors: M.L.Mazzucchelli, R.J.Angel, M.Alvaro'}
     type: Label
   layout_properties: {full_width_row: true, grid_position: 'HEPWBA,USLBUT'}
   name: about_panel

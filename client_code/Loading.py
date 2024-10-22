@@ -1,4 +1,5 @@
 from anvil import *
+import anvil.server
 import anvil.js
 from anvil.js.window import document
 
