@@ -61,12 +61,10 @@ class Initial_page(Initial_pageTemplate):
     def timer_to_close_EntraPTc_session_tick(self, **event_args):
       modal = Session_timeout()
       results = alert(modal, large=True, buttons = [("Yes", "YES"),("No", "NO"),], dismissible = False)
-      if results == ("Yes"):
+      if results == ("YES"):
         pass
-      elif results == ("No"):
-        anvil.server.call_s("close_current_EntraPTc_session")
-        anvil.users.logout()
-        open_form(Logout())
+      elif results == ("NO"):
+        EntraPT.close_current_EntraPTc_session()
         self.raise_event("x-close-alert", value=42)    
     
 
