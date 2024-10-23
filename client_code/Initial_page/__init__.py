@@ -30,26 +30,35 @@ class Initial_page(Initial_pageTemplate):
         self.content_panel.clear()
         self.content_panel.add_component(Home(), index=0)
       
-        self.sidebar_menu.set_event_handler("clicked", self.restrcted_menu_bar_access(""))
+        #self.sidebar_menu.set_event_handler("clicked", self.restrcted_menu_bar_access(""))
         
         
 
-    def sidebar_menu_clicked(self, clicked_item, file, **event_args):
+    def sidebar_menu_clicked(self, file, **event_args):
+      clicked_item = self.sidebar_menu.selected_item
+
+      if clicked_item == "home":
+        self.content_panel.clear()
+        self.content_panel.add_component(Home(), index=0)
       
       if clicked_item == "view_analyses":
         self.content_panel.clear()
         self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "new_project":
-        anvil.server.call_s('clear_project_in_EntraPTc', EntraPT.session_ID) 
-        self.content_panel.clear()
-        self.content_panel.add_component(Project(), index=0)
+        result = EntraPT.send_command_to_EntraPTc_server("clear_project_in_EntraPTc")
+        if result == -1:
+          return
+        # self.content_panel.clear()
+        # self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "upload_project":
-        with Loading.Loading('Please wait while we import your project...'):
-          anvil.server.call_s("overwrite_project_in_EntraPTc",EntraPT.session_ID, file.name, file)
-          self.content_panel.clear()
-          self.content_panel.add_component(Project(), index=0)
+        func_arg = (file.name, file)
+        result = EntraPT.send_command_to_EntraPTc_server("overwrite_project_in_EntraPTc", func_arg, "while we import your project")
+        if result == -1:
+          return
+        # self.content_panel.clear()
+        # self.content_panel.add_component(Project(), index=0)
         
       elif clicked_item == "entrapment":
         self.content_panel.clear()

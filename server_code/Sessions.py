@@ -77,20 +77,27 @@ def remove_current_session_from_database():
   for row in rows:
     row.delete()
   return
+  
+@anvil.server.callable
+def get_EntraPTc_ID():
+  rows = get_all_active_sessions_current_user()
+  if len(rows) >0:
+    EntraPTc_ID = rows[0]["entrapt_session_ID"]
+    return EntraPTc_ID
+  else:
+    return -1
 
 @anvil.server.callable
 def close_current_EntraPTc_session():
   rows = get_all_active_sessions_current_user()
-  if len(rows) >1:
+  if len(rows) >0:
     anvil.server.call("delete_EntraPTc_sessions",[rows[0]["entrapt_session_ID"]])
     remove_current_session_from_database()
   pass
   
 @anvil.server.callable
 def remove_orphan_sessions():
-  print("ciao")
   EntraPTc_sessions = anvil.server.call("get_names_of_all_active_sessions")
-  print(EntraPTc_sessions)
   rows = app_tables.sessions.search()
   sessions_in_database = list()
   for row in rows: 

@@ -25,8 +25,9 @@ class Project(ProjectTemplate):
 
 
   def update_project_data_grid(self):
-      self.repeating_panel_1.items = anvil.server.call_s('get_list_analyses_for_view_data', EntraPT.session_ID)
+    results = EntraPT.send_command_to_EntraPTc_server('get_list_analyses_for_view_data')
+    if results == -1:
+      return
+    self.repeating_panel_1.items = results
 
-
- 
     
