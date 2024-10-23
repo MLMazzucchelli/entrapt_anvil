@@ -29,10 +29,12 @@ class Initial_page(Initial_pageTemplate):
         anvil.server.call_s('ensure_user')       
         self.content_panel.clear()
         self.content_panel.add_component(Home(), index=0)
+      
+        self.sidebar_menu.set_event_handler("clicked", self.restrcted_menu_bar_access(""))
         
         
 
-    def sidebar_menu_1_clicked(self, clicked_item, file, **event_args):
+    def sidebar_menu_clicked(self, clicked_item, file, **event_args):
       
       if clicked_item == "view_analyses":
         self.content_panel.clear()
@@ -65,8 +67,12 @@ class Initial_page(Initial_pageTemplate):
       elif results == ("NO"):
         EntraPT.close_current_EntraPTc_session()
         self.raise_event("x-close-alert", value=42)    
-    
 
+
+    def restrcted_menu_bar_access(self, clicked_item, **event_args):
+      if clicked_item == "settings":
+        modal = Settings()
+        alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
         
 
 

@@ -19,3 +19,4 @@ class Home(HomeTemplate):
 
   def button_1_click(self, **event_args):
     EntraPT.session_ID = anvil.server.call('initialize_session')  
+    anvil.server.call_s("remove_orphan_sessions")

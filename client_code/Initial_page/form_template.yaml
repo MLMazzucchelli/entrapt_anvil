@@ -19,9 +19,9 @@ components:
   properties: {col_widths: '{}', role: null}
   type: ColumnPanel
 - components:
-  - event_bindings: {clicked: sidebar_menu_1_clicked}
+  - event_bindings: {clicked: sidebar_menu_clicked}
     layout_properties: {grid_position: 'IRRTNK,KWARNX'}
-    name: sidebar_menu_1
+    name: sidebar_menu
     properties: {}
     type: form:dep_k5afgxrmr4q1:SidebarMenu
   layout_properties: {slot: left-nav}

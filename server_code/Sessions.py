@@ -81,8 +81,9 @@ def remove_current_session_from_database():
 @anvil.server.callable
 def close_current_EntraPTc_session():
   rows = get_all_active_sessions_current_user()
-  anvil.server.call("delete_EntraPTc_sessions",[rows[0]["entrapt_session_ID"]])
-  remove_current_session_from_database()
+  if len(rows) >1:
+    anvil.server.call("delete_EntraPTc_sessions",[rows[0]["entrapt_session_ID"]])
+    remove_current_session_from_database()
   pass
   
 @anvil.server.callable
