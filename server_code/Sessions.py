@@ -51,8 +51,8 @@ def set_session_ID():
   return session_ID
     
 def register_session_in_database(browser_session_ID):
-    #session_ID = str(uuid.uuid1())
-    session_ID = anvil.users.get_user()['email']
+    session_ID = str(uuid.uuid1())
+    #session_ID = anvil.users.get_user()['email']
     app_tables.sessions.add_row(user_email=anvil.users.get_user()['email'],
                                 anvil_session_ID=browser_session_ID,
                                 entrapt_session_ID=session_ID,
@@ -87,7 +87,9 @@ def close_current_EntraPTc_session():
   
 @anvil.server.callable
 def remove_orphan_sessions():
+  print("ciao")
   EntraPTc_sessions = anvil.server.call("get_names_of_all_active_sessions")
+  print(EntraPTc_sessions)
   rows = app_tables.sessions.search()
   sessions_in_database = list()
   for row in rows: 

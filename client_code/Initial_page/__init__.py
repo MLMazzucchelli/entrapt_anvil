@@ -14,6 +14,7 @@ from ..Settings import Settings
 from ..Calculate_entrapment import Calculate_entrapment
 from ..Project import Project
 from ..Session_timeout import Session_timeout
+from ..Home import Home
 
 
 
@@ -25,11 +26,9 @@ class Initial_page(Initial_pageTemplate):
 
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
-        anvil.server.call_s('ensure_user')
-        EntraPT.session_ID = anvil.server.call('initialize_session')  
-        
+        anvil.server.call_s('ensure_user')       
         self.content_panel.clear()
-        self.content_panel.add_component(Project(), index=0)
+        self.content_panel.add_component(Home(), index=0)
         
         
 

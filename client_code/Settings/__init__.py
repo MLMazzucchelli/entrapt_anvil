@@ -20,9 +20,7 @@ class Settings(SettingsTemplate):
     # Any code you write here will run before the form opens.
 
   def log_out_click(self, **event_args):
-        anvil.server.call_s("close_current_EntraPTc_session")
-        anvil.users.logout()
-        open_form(Logout())
+        EntraPT.close_current_EntraPTc_session()
         self.raise_event("x-close-alert", value=42)   
 
   def load_tutorial_project_button_click(self, **event_args):

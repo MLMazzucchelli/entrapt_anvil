@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .. import EntraPT
 
 
 class Home(HomeTemplate):
@@ -15,3 +16,6 @@ class Home(HomeTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def button_1_click(self, **event_args):
+    EntraPT.session_ID = anvil.server.call('initialize_session')  
