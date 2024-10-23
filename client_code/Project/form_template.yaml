@@ -7,6 +7,8 @@ components:
     layout_properties: {full_width_row: true, grid_position: 'ACDHJR,OAOZZZ'}
     name: data_grid_analyses
     properties:
+      background: ''
+      border: '#000000'
       columns:
       - {data_key: column_1, expand: false, id: PTMKTE, title: View analysis, width: 123.88885498046875}
       - {data_key: full_label, id: JKSDUP, title: Full label}
@@ -22,6 +24,6 @@ components:
   properties: {background: '', col_spacing: none, col_widths: '{"CJDMOB":15,"OAOZZZ":63}', wrap_on: mobile}
   type: ColumnPanel
 container:
-  properties: {background: '', col_widths: '{}'}
+  properties: {background: '', border: '#000000', col_widths: '{}'}
   type: ColumnPanel
 is_package: true
