@@ -19,6 +19,7 @@ class Project(ProjectTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    #ciao
 
     # Any code you write here will run before the form opens.
     self.update_project_data_grid()
