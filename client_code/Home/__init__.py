@@ -18,5 +18,4 @@ class Home(HomeTemplate):
     # Any code you write here will run before the form opens.
 
   def button_1_click(self, **event_args):
-    EntraPT.session_ID = anvil.server.call('initialize_session')  
-    anvil.server.call_s("remove_orphan_sessions")
+    EntraPT.start_session(force_new=False)

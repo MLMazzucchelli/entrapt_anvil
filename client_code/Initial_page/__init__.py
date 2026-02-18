@@ -26,7 +26,8 @@ class Initial_page(Initial_pageTemplate):
 
         # Any code you write here will run before the form opens.
         anvil.users.login_with_form()
-        anvil.server.call_s('ensure_user')       
+        anvil.server.call_s('ensure_user')
+        EntraPT.start_session(force_new=False)
         self.content_panel.clear()
         self.content_panel.add_component(Home(), index=0)
       
@@ -74,7 +75,7 @@ class Initial_page(Initial_pageTemplate):
       if results == ("YES"):
         pass
       elif results == ("NO"):
-        EntraPT.close_current_EntraPTc_session()
+        EntraPT.logout_and_close_session()
         self.raise_event("x-close-alert", value=42)    
 
 

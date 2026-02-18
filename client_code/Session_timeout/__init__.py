@@ -29,7 +29,7 @@ class Session_timeout(Session_timeoutTemplate):
     if ttot < 1:        
       ttot = 1
       self.timer_session_timeout_popup.interval = 0
-      EntraPT.close_current_EntraPTc_session()
+      EntraPT.logout_and_close_session()
       self.raise_event("x-close-alert", value=42)       
       return
 

@@ -20,7 +20,7 @@ class Settings(SettingsTemplate):
     # Any code you write here will run before the form opens.
 
   def log_out_click(self, **event_args):
-        EntraPT.close_current_EntraPTc_session()
+        EntraPT.logout_and_close_session()
         self.raise_event("x-close-alert", value=42)   
 
   def load_tutorial_project_button_click(self, **event_args):

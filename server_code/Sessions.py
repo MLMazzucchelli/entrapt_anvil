@@ -1,29 +1,42 @@
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
-import anvil.email
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-#import plotly.graph_objects as go
-from anvil.tables import app_tables
 import anvil.server
-#import anvil.plotly_templates
-import subprocess
-import time
-import uuid 
-import pandas as pd
-import threading
-import os
-import datetime
+
+import session_service
+
 
 @anvil.server.callable
 def ensure_user():
-  user = anvil.users.get_user()
-  if user is None:
-    raise anvil.users.AuthenticationFailed('No logged in user')
-  if user["groups"] is None: #ensure that the user is at least in the default group
-    user["groups"] = "default"
-  return user 
+  return session_service.ensure_user()
+
+
+@anvil.server.callable
+def session_start(force_new=False):
+  session_id, _created = session_service.create_or_get_session(force_new=force_new)
+  return session_id
+
+
+@anvil.server.callable
+def session_status():
+  session_id = session_service.get_current_session_id()
+  return {
+    "active": session_id != -1,
+    "session_id": None if session_id == -1 else session_id,
+  }
+
+
+@anvil.server.callable
+def session_close():
+  return session_service.close_current_session()
+
+
+@anvil.server.callable
+def entraptc_call(command, command_arguments=()):
+  return session_service.dispatch_entraptc_command(command, command_arguments)
+
+
+@anvil.server.callable
+def miteosp_run(args, timeout=120, serialize_globally=True):
+  return session_service.run_miteosp(
+    args=args,
+    timeout=timeout,
+    serialize_globally=serialize_globally,
+  )
