@@ -244,7 +244,6 @@ def get_list_analyses_for_view_data(session_id):
     pinc_eos=True,
     pinc_stress=True,
   )
-  print(out)
   return out
 
 
