@@ -236,7 +236,8 @@ def get_list_analyses_for_view_data(session_id):
   ept = _get_entraptc(session_id)
   out = ept.prj.list_analyses(
     ID=True,
-    HI_phases=True,
+    HI_phases=False,
+    HI_names=True,
     strain=True,
     stress=True,
     notes=False,
