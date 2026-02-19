@@ -20,11 +20,33 @@ class Project(ProjectTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self._all_columns = list(self.data_grid_analyses.columns)
+    self._ensure_column_widths()
     
     #self.apply_visible_columns(['full_label', 'host_name'])#Choose columns to display
 
     # Any code you write here will run before the form opens.
     self.update_project_data_grid()
+
+  def _ensure_column_widths(self):
+    width_by_key = {
+      "column_1": 124,
+      "full_label": 260,
+      "host_name": 220,
+      "inclusion_name": 220,
+      "residual_strain": 200,
+      "Pinc_eos": 180,
+      "Pinc_stress": 180,
+      "residual_stress": 200,
+    }
+    updated = []
+    for col in self._all_columns:
+      c = dict(col)
+      key = str(c.get("data_key", ""))
+      c["expand"] = False
+      c["width"] = width_by_key.get(key, c.get("width") or 200)
+      updated.append(c)
+    self._all_columns = updated
+    self.data_grid_analyses.columns = list(self._all_columns)
 
   def apply_visible_columns(self, column_keys=None):
     if not column_keys:

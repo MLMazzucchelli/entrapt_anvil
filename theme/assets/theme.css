@@ -212,6 +212,28 @@ color: %color:On Primary Container%;
 /* Allow overflows to show drop shadows in ColumnPanels
    This can create unwanted scrollbars; we compensate for this at the top level with .nav-holder .content {overflow-x: hidden;}
 */
+
+/* Horizontal scroll for Anvil DataGrid (forum pattern). */
+.anvil-role-horizontal-scroll {
+  overflow: hidden;
+}
+
+.anvil-role-horizontal-scroll .data-grid-child-panel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.anvil-role-horizontal-scroll .anvil-data-row-panel {
+  flex-wrap: nowrap;
+  min-width: -moz-min-content;
+  min-width: min-content;
+}
+
+.anvil-role-horizontal-scroll .data-grid-child-panel div.data-row-col {
+  padding-left: 12px;
+  padding-right: 12px;
+}
 .anvil-container-overflow {
   overflow-x: visible;
   overflow-y: visible;
