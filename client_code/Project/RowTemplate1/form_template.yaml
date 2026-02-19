@@ -4,5 +4,7 @@ components:
   name: view_selected_analysis_button
   properties: {icon: 'fa:external-link', text: ''}
   type: Button
-container: {type: DataRowPanel}
+container:
+  properties: {visible: true}
+  type: DataRowPanel
 is_package: true
