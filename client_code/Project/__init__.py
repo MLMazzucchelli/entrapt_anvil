@@ -28,17 +28,8 @@ class Project(ProjectTemplate):
   def update_project_data_grid(self):
     results = EntraPT.send_command_to_entraptc('get_list_analyses_for_view_data')
     if results == -1:
-      return
-      
-    clean = [
-      {
-        "Full label": r["full_label"],
-        "Host": r["host_name"],
-        "Inclusion": r["inclusion_name"],
-        "Residual strain": r["residual_strain"]
-      }
-      for r in results
-    ]
+       return
     self.repeating_panel_1.items = results
 
-    
+
+        

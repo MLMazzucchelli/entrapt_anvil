@@ -12,8 +12,8 @@ components:
       columns:
       - {data_key: column_1, expand: false, id: PTMKTE, title: View analysis, width: 123.88885498046875}
       - {data_key: full_label, id: JKSDUP, title: Full label}
-      - {data_key: host_phase, id: VJQQOR, title: Host}
-      - {data_key: inclusion_phase, id: OJLQEN, title: Inclusion}
+      - {data_key: host_name, id: VJQQOR, title: Host}
+      - {data_key: inclusion_name, id: OJLQEN, title: Inclusion}
       - {data_key: residual_strain, id: NTOQAT, title: Residual strain}
       - {data_key: residual_stress, id: GAWGTF, title: Residual stress}
       show_page_controls: true
