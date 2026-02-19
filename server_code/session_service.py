@@ -234,58 +234,16 @@ def get_list_analyses_for_tree(session_id):
 
 def get_list_analyses_for_view_data(session_id):
   ept = _get_entraptc(session_id)
-  analysis_rows = ept.prj.list_analyses()
-
-  def _extract_phase_name(analysis_obj, mineral_kind):
-    try:
-      mineral = analysis_obj.HI_system.get_item(mineral_kind, 1)
-      props = mineral.get_properties()
-      phase = props.get("phase", {})
-      if isinstance(phase, list):
-        phase = phase[0] if phase else {}
-      return str(phase.get("name", ""))
-    except Exception:
-      return ""
-
-  def _fmt_vector(values):
-    try:
-      vals = list(values)
-      return ", ".join([f"{float(v):.3g}" for v in vals])
-    except Exception:
-      return ""
-
-  out = []
-  for row in analysis_rows:
-    analysis_id = str(row.get("ID", ""))
-    label = str(row.get("label", analysis_id))
-    analysis_list = ept.prj.get_analyses_by_ID(analysis_id)
-    an = analysis_list[0] if analysis_list else None
-
-    host_phase = _extract_phase_name(an, "host") if an is not None else ""
-    inclusion_phase = _extract_phase_name(an, "inclusion") if an is not None else ""
-
-    residual_strain = ""
-    residual_stress = ""
-    if an is not None:
-      try:
-        residual_strain = _fmt_vector(an.residual_strain.strain.value)
-      except Exception:
-        pass
-      try:
-        residual_stress = _fmt_vector(an.residual_stress.value)
-      except Exception:
-        pass
-
-    out.append(
-      {
-        "ID": analysis_id,
-        "full_label": label,
-        "host_phase": host_phase,
-        "inclusion_phase": inclusion_phase,
-        "residual_strain": residual_strain,
-        "residual_stress": residual_stress,
-      }
-    )
+  out = ept.prj.list_analyses(
+    ID=True,
+    HI_phases=True,
+    strain=True,
+    stress=True,
+    notes=False,
+    pinc_eos=True,
+    pinc_stress=True,
+  )
+  print(out)
   return out
 
 
