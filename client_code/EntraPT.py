@@ -33,10 +33,10 @@ def logout_and_close_session():
     open_form(Logout())
 
 
-def send_command_to_EntraPTc_server(command, command_arguments=(), loading_bar_msg=""):
+def send_command_to_entraptc(command, command_arguments=(), loading_bar_msg=""):
   if not session_is_active():
     answer = alert(
-      "Connection with EntraPTc Server is not active.\nDo you want to start a new EntraPTc session?",
+      "Connection with EntraPTc server is not active.\nDo you want to start a new EntraPTc session?",
       buttons=[("Yes", "YES"), ("No", "NO")],
       dismissible=False,
     )
@@ -52,8 +52,8 @@ def send_command_to_EntraPTc_server(command, command_arguments=(), loading_bar_m
   return anvil.server.call_s("entraptc_call", command, command_arguments)
 
 
-def run_miteosp(args, loading_bar_msg="", timeout=120, serialize_globally=True):
+def run_entraptc(args, loading_bar_msg="", timeout=120, serialize_globally=True):
   if loading_bar_msg:
     with Loading.Loading("Please wait, %s..." % loading_bar_msg):
-      return anvil.server.call_s("miteosp_run", tuple(args), timeout, serialize_globally)
-  return anvil.server.call_s("miteosp_run", tuple(args), timeout, serialize_globally)
+      return anvil.server.call_s("entraptc_run", tuple(args), timeout, serialize_globally)
+  return anvil.server.call_s("entraptc_run", tuple(args), timeout, serialize_globally)

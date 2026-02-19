@@ -24,10 +24,8 @@ class Settings(SettingsTemplate):
         self.raise_event("x-close-alert", value=42)   
 
   def load_tutorial_project_button_click(self, **event_args):
-      file = anvil.server.call_s("get_tutorial_project")
-      func_arg = (file.name, file)
-      results = EntraPT.send_command_to_EntraPTc_server("overwrite_project_in_EntraPTc", func_arg, "while we load the tutorial project")
-      if results == -1:
+      results = anvil.server.call_s("load_tutorial_project")
+      if not results:
         self.raise_event("x-close-alert", value=42)
         return
       get_open_form().content_panel.clear()

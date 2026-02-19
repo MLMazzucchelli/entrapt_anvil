@@ -1,4 +1,6 @@
 import anvil.server
+import os
+import sys
 
 import session_service
 
@@ -34,9 +36,51 @@ def entraptc_call(command, command_arguments=()):
 
 
 @anvil.server.callable
-def miteosp_run(args, timeout=120, serialize_globally=True):
-  return session_service.run_miteosp(
+def entraptc_run(args, timeout=120, serialize_globally=True):
+  return session_service.run_entraptc(
     args=args,
     timeout=timeout,
     serialize_globally=serialize_globally,
   )
+
+
+@anvil.server.callable
+def get_list_analyses_for_tree(session_id):
+  return session_service.get_list_analyses_for_tree(session_id)
+
+
+@anvil.server.callable
+def get_list_analyses_for_view_data(session_id):
+  return session_service.get_list_analyses_for_view_data(session_id)
+
+
+@anvil.server.callable
+def load_tutorial_project():
+  return session_service.load_tutorial_project()
+
+
+@anvil.server.callable
+def get_HIsystem_properties(session_id, analysis_id):
+  return session_service.get_HIsystem_properties(session_id, analysis_id)
+
+
+@anvil.server.callable
+def debug_entraptc_environment():
+  info = {
+    "python_executable": sys.executable,
+    "cwd": os.getcwd(),
+    "MITEOSP_SRC": os.environ.get("MITEOSP_SRC"),
+    "MITEOSP_HOME": os.environ.get("MITEOSP_HOME"),
+    "sys_path_head": sys.path[:10],
+  }
+  try:
+    try:
+      from miteos.entraptc.entraptc import EntraPTc
+    except Exception:
+      from miteos.entraptc import EntraPTc
+    info["import_ok"] = True
+    info["entraptc_class"] = str(EntraPTc)
+  except Exception as exc:
+    info["import_ok"] = False
+    info["import_error"] = str(exc)
+  return info

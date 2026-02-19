@@ -16,16 +16,16 @@ def _env_bool(name, default=True):
   return value.strip().lower() in ("1", "true", "yes", "y", "on")
 
 
-MITEOSP_BIN = os.environ.get("MITEOSP_BIN", "miteosp")
+ENTRAPTC_BIN = os.environ.get("ENTRAPTC_BIN", "entraptc")
 RUNTIME_ROOT = os.environ.get(
-  "MITEOSP_RUNTIME_ROOT",
-  os.path.join(tempfile.gettempdir(), "miteosp_runtime"),
+  "ENTRAPTC_RUNTIME_ROOT",
+  os.path.join(tempfile.gettempdir(), "entraptc_runtime"),
 )
 GLOBAL_LOCK_PATH = os.environ.get(
-  "MITEOSP_GLOBAL_LOCK_PATH",
+  "ENTRAPTC_GLOBAL_LOCK_PATH",
   os.path.join(RUNTIME_ROOT, "global.lock"),
 )
-SERIALIZE_GLOBALLY_DEFAULT = _env_bool("MITEOSP_SERIALIZE_GLOBALLY", True)
+SERIALIZE_GLOBALLY_DEFAULT = _env_bool("ENTRAPTC_SERIALIZE_GLOBALLY", True)
 
 
 class RuntimeManager:
@@ -45,13 +45,16 @@ class RuntimeManager:
     os.makedirs(run_dir, exist_ok=True)
     return run_dir
 
+  def get_run_dir(self, session_id):
+    return self.create(session_id)
+
   def close(self, session_id):
     run_dir = self._run_dir(session_id)
     shutil.rmtree(run_dir, ignore_errors=True)
 
   def run(self, session_id, args, timeout=120, serialize_globally=True):
     run_dir = self.create(session_id)
-    cmd = [MITEOSP_BIN, *list(args or [])]
+    cmd = [ENTRAPTC_BIN, *list(args or [])]
     serialize = SERIALIZE_GLOBALLY_DEFAULT if serialize_globally is None else serialize_globally
 
     def _execute():

@@ -25,7 +25,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
 
   def tree_show(self, **event_args):
       # Get the data
-      results = EntraPT.send_command_to_EntraPTc_server('get_list_analyses_for_tree')
+      results = EntraPT.send_command_to_entraptc('get_list_analyses_for_tree')
       if results != -1:
         self.tree_data = results
       else:
@@ -49,7 +49,7 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
 
   def tree_refresh(self):
       # Refresh the tree with new data in project
-      results = EntraPT.send_command_to_EntraPTc_server('get_list_analyses_for_tree')
+      results = EntraPT.send_command_to_entraptc('get_list_analyses_for_tree')
       if results != -1:
         self.tree_data = results
       else:
@@ -79,4 +79,4 @@ class Calculate_entrapment(Calculate_entrapmentTemplate):
   def calculate_entrapment_button_click(self, **event_args):   
       IDs = self.get_analyses_IDs_from_tree()
       function_arg = (IDs, 300, 1200, 100)
-      self.tree_data = EntraPT.send_command_to_EntraPTc_server("calculate_entrapment", function_arg, "calculation_in_progress")
+      self.tree_data = EntraPT.send_command_to_entraptc("calculate_entrapment", function_arg, "calculation_in_progress")

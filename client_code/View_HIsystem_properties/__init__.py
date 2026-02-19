@@ -16,7 +16,7 @@ class View_HIsystem_properties(View_HIsystem_propertiesTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
-    self.HIsystem_properties_text.text = EntraPT.send_command_to_EntraPTc_server(
+    self.HIsystem_properties_text.text = EntraPT.send_command_to_entraptc(
       "get_HIsystem_properties",
       (EntraPT.current_analysis_ID,)
     )

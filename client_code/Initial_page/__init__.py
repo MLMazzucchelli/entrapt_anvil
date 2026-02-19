@@ -47,7 +47,7 @@ class Initial_page(Initial_pageTemplate):
         self.content_panel.add_component(Project(), index=0)
 
       elif clicked_item == "new_project":
-        result = EntraPT.send_command_to_EntraPTc_server("clear_project_in_EntraPTc")
+        result = EntraPT.send_command_to_entraptc("clear_project_in_EntraPTc")
         if result == -1:
           return
         # self.content_panel.clear()
@@ -55,7 +55,7 @@ class Initial_page(Initial_pageTemplate):
 
       elif clicked_item == "upload_project":
         func_arg = (file.name, file)
-        result = EntraPT.send_command_to_EntraPTc_server("overwrite_project_in_EntraPTc", func_arg, "while we import your project")
+        result = EntraPT.send_command_to_entraptc("overwrite_project_in_EntraPTc", func_arg, "while we import your project")
         if result == -1:
           return
         # self.content_panel.clear()
