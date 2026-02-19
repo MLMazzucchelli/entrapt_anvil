@@ -31,6 +31,16 @@ def session_close():
 
 
 @anvil.server.callable
+def session_touch():
+  return session_service.touch_current_session()
+
+
+@anvil.server.callable
+def session_cleanup_idle_now():
+  return session_service.cleanup_idle_sessions_now()
+
+
+@anvil.server.callable
 def entraptc_call(command, command_arguments=()):
   return session_service.dispatch_entraptc_command(command, command_arguments)
 

@@ -70,6 +70,10 @@ class Initial_page(Initial_pageTemplate):
         alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
 
     def timer_to_close_EntraPTc_session_tick(self, **event_args):
+      try:
+        anvil.server.call_s("session_touch")
+      except Exception:
+        pass
       modal = Session_timeout()
       results = alert(modal, large=True, buttons = [("Yes", "YES"),("No", "NO"),], dismissible = False)
       if results == ("YES"):
