@@ -5,6 +5,8 @@ components:
   properties: {icon: 'fa:external-link', text: ''}
   type: Button
 container:
+  data_bindings:
+  - {code: 'self.item[''ddd'',''asas'']', property: tag, writeback: false}
   properties: {visible: true}
   type: DataRowPanel
 is_package: true
