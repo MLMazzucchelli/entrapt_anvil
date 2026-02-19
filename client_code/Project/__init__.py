@@ -27,7 +27,11 @@ class Project(ProjectTemplate):
     self._rows = []
     self._sort_key = None
     self._sort_desc = False
+    self._column_title_by_key = {}
+    self._available_column_keys = []
+    self._visible_column_keys = []
     self._setup_sort_controls()
+    self._setup_column_controls()
     
     #self.apply_visible_columns(['full_label', 'host_name'])#Choose columns to display
 
@@ -57,13 +61,18 @@ class Project(ProjectTemplate):
 
   def apply_visible_columns(self, column_keys=None):
     if not column_keys:
-      self.data_grid_analyses.columns = list(self._all_columns)
-      return
+      self._visible_column_keys = list(self._available_column_keys)
+    else:
+      asked = [str(k) for k in column_keys]
+      self._visible_column_keys = [k for k in self._available_column_keys if k in asked]
+      if not self._visible_column_keys:
+        self._visible_column_keys = list(self._available_column_keys)
 
-    allowed = set([str(k) for k in column_keys])
+    allowed = set(self._visible_column_keys)
     allowed.add("column_1")  # Always keep the action button column.
-    filtered = [col for col in self._all_columns if str(col.get("data_key")) in allowed]
+    filtered = [col for col in self._all_columns if str(col.get("data_key", "")) in allowed]
     self.data_grid_analyses.columns = filtered
+    self._refresh_visible_column_dropdown_items()
 
   def _setup_sort_controls(self):
     sortable = []
@@ -80,6 +89,50 @@ class Project(ProjectTemplate):
       self._sort_key = sortable[0][1]
     self.check_box_sort_desc.checked = False
     self._sort_desc = False
+
+  def _setup_column_controls(self):
+    self._available_column_keys = []
+    self._column_title_by_key = {}
+    for col in self._all_columns:
+      key = str(col.get("data_key", "")).strip()
+      if key == "column_1":
+        continue
+      title = str(col.get("title", key)).strip()
+      self._available_column_keys.append(key)
+      self._column_title_by_key[key] = title
+
+    self._visible_column_keys = list(self._available_column_keys)
+    self._refresh_visible_column_dropdown_items()
+    self.drop_down_visible_column.selected_value = "__noop__"
+
+  def drop_down_visible_column_change(self, **event_args):
+    selected = str(self.drop_down_visible_column.selected_value or "").strip()
+    if not selected or selected == "__noop__":
+      return
+    if selected == "__all__":
+      self.apply_visible_columns(None)
+      self.drop_down_visible_column.selected_value = "__noop__"
+      return
+
+    visible = set(self._visible_column_keys)
+    if selected in visible:
+      if len(visible) > 1:
+        visible.remove(selected)
+    else:
+      visible.add(selected)
+
+    ordered = [k for k in self._available_column_keys if k in visible]
+    self.apply_visible_columns(ordered)
+    self.drop_down_visible_column.selected_value = "__noop__"
+
+  def _refresh_visible_column_dropdown_items(self):
+    visible = set(self._visible_column_keys)
+    items = [("Select column...", "__noop__"), ("All columns", "__all__")]
+    for key in self._available_column_keys:
+      title = self._column_title_by_key.get(key, key)
+      prefix = "[x] " if key in visible else "[ ] "
+      items.append((prefix + title, key))
+    self.drop_down_visible_column.items = items
 
 
   def update_project_data_grid(self):
