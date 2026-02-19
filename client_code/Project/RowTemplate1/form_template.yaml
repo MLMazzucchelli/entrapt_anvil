@@ -6,6 +6,6 @@ components:
   type: Button
 container:
   data_bindings: []
-  properties: {auto_display_data: false, visible: true}
+  properties: {auto_display_data: true, visible: true}
   type: DataRowPanel
 is_package: true
