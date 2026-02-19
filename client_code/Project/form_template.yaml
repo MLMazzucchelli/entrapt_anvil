@@ -16,7 +16,7 @@ components:
       - {data_key: inclusion_name, id: OJLQEN, title: Inclusion}
       - {data_key: residual_strain, id: NTOQAT, title: Residual strain}
       - {data_key: Pinc_eos, id: GAWGTF, title: Pinc(eos)}
-      - {data_key: Pinc_eos_esd, id: GAWGTL, title: esd Pinc(eos)}
+      - {data_key: Pinc_stress, id: DAWGTF, title: Pinc(stress)}
       show_page_controls: true
       wrap_on: mobile
     type: DataGrid

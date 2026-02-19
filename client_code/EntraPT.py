@@ -10,6 +10,7 @@ current_analysis_ID = None
 current_analysis_label = None
 
 
+
 def start_session(force_new=False):
   return anvil.server.call_s("session_start", force_new)
 
@@ -57,3 +58,4 @@ def run_entraptc(args, loading_bar_msg="", timeout=120, serialize_globally=True)
     with Loading.Loading("Please wait, %s..." % loading_bar_msg):
       return anvil.server.call_s("entraptc_run", tuple(args), timeout, serialize_globally)
   return anvil.server.call_s("entraptc_run", tuple(args), timeout, serialize_globally)
+
