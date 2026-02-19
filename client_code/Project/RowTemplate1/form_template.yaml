@@ -4,6 +4,18 @@ components:
   name: view_selected_analysis_button
   properties: {icon: 'fa:external-link', text: ''}
   type: Button
+- layout_properties: {column: JKSDUP}
+  name: label
+  properties: {}
+  type: Label
+- layout_properties: {column: VJQQOR}
+  name: host_name
+  properties: {}
+  type: Label
+- layout_properties: {column: OJLQEN}
+  name: inclusion_name
+  properties: {}
+  type: Label
 container:
   data_bindings:
   - {code: 'self.item[''ddd'',''asas'']', property: tag, writeback: false}
