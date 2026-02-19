@@ -1,6 +1,22 @@
 components:
 - components:
   - components:
+    - name: label_sort_by
+      properties: {bold: true, text: 'Sort by:'}
+      type: Label
+    - event_bindings: {change: drop_down_sort_column_change}
+      name: drop_down_sort_column
+      properties: {}
+      type: DropDown
+    - event_bindings: {change: check_box_sort_desc_change}
+      name: check_box_sort_desc
+      properties: {text: Descending}
+      type: CheckBox
+    layout_properties: {full_width_row: false, grid_position: 'DJVWCC,WNWWAO'}
+    name: flow_panel_sort_controls
+    properties: {align: left, spacing: medium}
+    type: FlowPanel
+  - components:
     - name: repeating_panel_1
       properties: {item_template: Project.RowTemplate1}
       type: RepeatingPanel
