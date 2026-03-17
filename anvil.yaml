@@ -44,6 +44,26 @@ db_schema:
       type: string
     server: full
     title: Sessions
+  password_resets:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: token_hash
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: requested_at
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: expires_at
+      type: datetime
+    - admin_ui: {order: 4, width: 200}
+      name: used_at
+      type: datetime
+    server: full
+    title: Password Resets
   users:
     client: none
     columns:

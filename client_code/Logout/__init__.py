@@ -17,5 +17,4 @@ class Logout(LogoutTemplate):
     # Any code you write here will run before the form opens.
 
   def sign_in_click(self, **event_args):
-    anvil.users.login_with_form()
-    open_form('Initial_page')
+    open_form("Login")

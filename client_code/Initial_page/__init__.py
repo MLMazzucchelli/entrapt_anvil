@@ -23,11 +23,23 @@ class Initial_page(Initial_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        authenticated = bool(properties.get("authenticated"))
+
+        reset_request = self._get_reset_request()
+        if reset_request is not None:
+          open_form("Reset_password", **reset_request)
+          return
 
         # Any code you write here will run before the form opens.
-        anvil.users.login_with_form()
+        if not authenticated:
+          open_form("Login")
+          return
         anvil.server.call_s('ensure_user')
-        EntraPT.start_session(force_new=False)
+        try:
+          EntraPT.start_session(force_new=False)
+        except Exception:
+          # Keep login usable even if the EntraPTc backend is not ready yet.
+          pass
         self.content_panel.clear()
         self.content_panel.add_component(Home(), index=0)
       
@@ -87,6 +99,33 @@ class Initial_page(Initial_pageTemplate):
       if clicked_item == "settings":
         modal = Settings()
         alert(modal, large=True, title = "SETTINGS", buttons = [], dismissible = True)
+
+    def _get_reset_request(self):
+      try:
+        search = str(anvil.js.window.location.search or "")
+      except Exception:
+        return None
+
+      if search.startswith("?"):
+        search = search[1:]
+
+      params = {}
+      for item in search.split("&"):
+        if not item or "=" not in item:
+          continue
+        key, value = item.split("=", 1)
+        try:
+          key = str(anvil.js.window.decodeURIComponent(key.replace("+", " ")))
+          value = str(anvil.js.window.decodeURIComponent(value.replace("+", " ")))
+        except Exception:
+          continue
+        params[key] = value
+
+      email = params.get("reset_email", "")
+      token = params.get("reset_token", "")
+      if not email or not token:
+        return None
+      return {"email": email, "token": token}
         
 
 
